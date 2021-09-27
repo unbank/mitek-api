@@ -24,19 +24,19 @@ use Unbank\Identity\Mitek\MitekAPI;
 
 
 $mitek = new MitekAPI(
-    null,
-    $request->input('sandbox', null)
+    null, // Auth Token
+    true // Use Mitek Sandbox API URL
 );
 $mitek->auth(
-    $request->input('client_id', config('mitek.client_id')),
-    $request->input('client_secret', config('mitek.client_secret')),
-    $request->input('grant_type', config('mitek.grant_type')),
-    $request->input('scope', config('mitek.scope'))
+    'YOUR-MITEK-CLIENT-ID'
+    'YOUR-MITEK-CLIENT-SECRET',
+    'YOUR-MITEK-GRANT_TYPE',
+    'YOUR-MITEK-SCOPE'
 );
 $response = $mitek->verify(
-    $request->input('images', array()),
-    $user->getCustomerReferenceId(true),
-    $request->input('type','IdDocument')
+    $images,
+    'YOUR-CUSTOMER-REFERENCE-ID',
+    'idDocument'
 );
 
 echo $response['evidence']["extractedData"]["name"]["fullName"]
