@@ -1,0 +1,21 @@
+{
+    "name": "unbank/mitek",
+    "description": "Mitek Integration",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Unbank\\Identity\\Mitek\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oshane Bailey",
+            "email": "b4.oshany@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
