@@ -1,0 +1,11 @@
+# Folders
+/vendor
+
+# Files
+.env
+.env.backup
+.phpunit.result.cache
+
+# Docker Files
+.env_file
+docker-compose.override.yml

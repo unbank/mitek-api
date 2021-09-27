@@ -2,6 +2,7 @@
     "name": "unbank/mitek",
     "description": "Mitek Integration",
     "type": "library",
+    "version": "1.0.0",
     "require": {
         "guzzlehttp/guzzle": "*"
     },
@@ -17,5 +18,5 @@
             "email": "b4.oshany@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "beta"
 }
