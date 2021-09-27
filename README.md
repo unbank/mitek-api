@@ -58,8 +58,35 @@ For more information about Verify Auto - Response, see
 https://docs.us.mitekcloud.com/#verify-auto-response
 
 
+# Roadmap based on [Mitek API Endpoints](https://docs.us.mitekcloud.com/#introduction)
+- Authentication ***(Done)***
+- Mobile Verify - Auto
+    - Verify Auto - Request ***(Done)***
+    - Verify Auto - Response ***(Done)***
+    - Verify Auto - HTTP Response Headers
+    - Verify Auto - HTTP Response Codes
+    - Verify Auto - HTTP Error Responses
+    - Verify Auto - Processing Reasons
+<!-- - Mobile Fill - Auto
+    - Fill Auto - Request
+    - Fill Auto - Response
+    - Fill Auto - HTTP Response Headers
+    - Fill Auto - HTTP Response Codes
+    - Fill Auto - Processing Reasons
+    - Fill Auto - HTTP Error Responses
+- Mobile Docs - Auto
+    - Docs Auto - Request
+    - Docs Auto - Response
+    - Docs Auto - HTTP Response Headers
+    - Docs Auto - HTTP Response Codes
+    - Docs Auto - HTTP Error Responses -->
+
+
+
+
+
 # Issue Tracker
-Please use the `issue tracker <http://github.com/unbank/mitek-api/issues>`_
+Please use our [issue tracker](http://github.com/unbank/mitek-api/issuees)
 
 
 # License
