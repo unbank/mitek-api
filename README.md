@@ -3,7 +3,7 @@ PHP API Library for Mitek Identity Cloud that provides authenticating and extrac
 
 This library aims to provice all the API found on the [Mitek API Docs](https://docs.us.mitekcloud.com/#introduction) page.
 
-### What's Mitek
+### What's Mitek?
 Mitek is a Digital identity solutions that is designed to prevent fraud, increase conversions and streamline operations
 
 Mitek uses OAuth v2 with JWT tokens for authorization and OpenID for authentication. This token-based standard leverages temporary tokens that provide access to a resource for a limited duration. In our production environments, these tokens will be valid for 5 minutes from the time the token is first issued. When you are requesting one of these temporary tokens, you need to provide the resource you are trying to access (in OAuth this is called the scope). It is best practice to request only the minimally required scope(s) for the operation(s) in order to limit the rights of the access token provided.
