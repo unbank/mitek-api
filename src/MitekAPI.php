@@ -3,7 +3,7 @@
 namespace Unbank\Identity\Mitek;
 
 use Carbon\Carbon;
-
+use Unbank\Identity\Mitek\Traits\CurlTrait;
 
 /**
  * PHP Library for Mitek API
@@ -14,6 +14,8 @@ use Carbon\Carbon;
  */
 class MitekAPI
 {
+
+    use CurlTrait;
 
     protected $client_id;
     protected $client_secret;
@@ -105,36 +107,6 @@ class MitekAPI
     }
 
     /**
-     * Send API request
-     *
-     * @uses Mitek::auth        Get the authentication token from the response.
-     * @param [type] $url       API Endpoint
-     * @param [type] $postData  HTTP Post Data
-     * @return array            Returns Mitek JSON repsonse as an array.
-     */
-    protected function request($url, $postData) {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => $url,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS => $postData,
-          CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json',
-            'Authorization: Bearer '.$this->token
-          ),
-        ));
-        $response = curl_exec($curl);
-        curl_close($curl);
-        return json_decode($response, true);
-    }
-
-    /**
      * Verify Document
      *
      * @link https://docs.us.mitekcloud.com/#verify-auto-response
@@ -146,7 +118,7 @@ class MitekAPI
      * @param string $docType                   Type of evidence to be processed.
      * @return array                            Returns Mitek API Verify Auto - Response as an array.
      */
-    public function verify(array $images, string $customer_reference_id='', string $docType='IdDocument')
+    public function verify(array $images, string $selfie=null, string $customer_reference_id='', string $docType='IdDocument')
     {
 
         if ( !empty($customer_reference_id) ) {
@@ -156,6 +128,18 @@ class MitekAPI
                 ];
             }
         }
+
+        if ( !empty($selfie) ) {
+            $biometric = '{
+                "type": "Biometric",
+                "biometricType": "Selfie",
+                "data": "'. $selfie .'"
+              }
+            ';
+        } else {
+            $biometric = '';
+        }
+
         $images_json = json_encode($images);
 
         $postData = '{
@@ -165,6 +149,7 @@ class MitekAPI
                     "type": "'.$docType.'",
                     "images": '.$images_json.'
                 }
+                '.( (!empty($biometric))? ", $biometric" : '' ).'
             ]
         }';
         $data = $this->request("$this->api_url/api/verify/v2/dossier", $postData);
