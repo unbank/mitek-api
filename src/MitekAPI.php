@@ -129,6 +129,7 @@ class MitekAPI
             }
         }
 
+        $has_selfie = '';
         if ( !empty($selfie) ) {
             $biometric = '{
                 "type": "Biometric",
@@ -136,6 +137,12 @@ class MitekAPI
                 "data": "'. $selfie .'"
               }
             ';
+            $has_selfie = ',
+            "configuration": {
+                "verifications": {
+                  "faceComparison": true
+                }
+              }';
         } else {
             $biometric = '';
         }
@@ -150,8 +157,11 @@ class MitekAPI
                     "images": '.$images_json.'
                 }
                 '.( (!empty($biometric))? ", $biometric" : '' ).'
-            ]
+            ]'.$has_selfie.'
         }';
+
+
+        $user = \Auth::user();
         $data = $this->request("$this->api_url/api/verify/v2/dossier", $postData);
         return $data;
     }

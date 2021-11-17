@@ -84,7 +84,7 @@ class AgentAPI extends MitekAPI
      * @param string $deviceExtractedData       Type of evidence to be processed.
      * @return array                            Returns Mitek API Verify Auto - Response as an array.
      */
-    public function agent_verify(array $images, string $transactionRequestId=null, string $customer_reference_id='', string $deviceExtractedData=null)
+    public function agent_verify(string $transactionRequestId, array $images, string $customer_reference_id='', string $deviceExtractedData=null)
     {
         $postData = [
             "images" => $images
@@ -112,12 +112,12 @@ class AgentAPI extends MitekAPI
      *
      * @link https://developer.us.mitekcloud.com/#manual-retrieval-request
      *
-     * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
+     * @param string $retrievalId       A valid UUID for a previously submitted Mobile Verify Auto request
      * @return array                            Returns Mitek API Verify Auto - Response as an array.
      */
-    public function agent_review(string $transactionRequestId)
+    public function agent_retrieval(string $retrievalId)
     {
-        $data = $this->getRequest("$this->api_url/identity/verify/v3/id-document/manual/$transactionRequestId");
+        $data = $this->getRequest("$this->api_url/identity/verify/v3/id-document/manual/$retrievalId");
         return $data;
     }
 
@@ -171,7 +171,7 @@ class AgentAPI extends MitekAPI
      * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
      * @return array                            Returns Mitek API Verify Auto - Response as an array.
      */
-    public function expert_review(string $transactionRequestId)
+    public function expert_retrieval(string $transactionRequestId)
     {
         $data = $this->getRequest("$this->api_url/identity/verify/v3/id-document/expert/$transactionRequestId");
         return $data;
@@ -180,14 +180,16 @@ class AgentAPI extends MitekAPI
 
 
     /**
-     * Verify Document
+     * Polling is implemented as a simple GET operation on the polling end-point and will
+     * return a list of current transactions for the tenant with details of their current status:
+     * (PROCESSING, COMPLETED, or ERROR).
      *
      * @link https://developer.us.mitekcloud.com/#polling-request
      *
      * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
      * @return array                            Returns Mitek API Verify Auto - Response as an array.
      */
-    public function agent_polling(string $transactionRequestId)
+    public function agent_polling()
     {
         $data = $this->getRequest("$this->api_url/identity/v3/poll");
         return $data;
