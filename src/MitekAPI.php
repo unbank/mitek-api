@@ -160,8 +160,8 @@ class MitekAPI
             ]'.$has_selfie.'
         }';
 
-
-        $user = \Auth::user();
+        // $user = \Auth::user();
+        // file_put_contents("/var/www/html/resources/assets/mitek/request-user-$user->id-data.json", $postData);
         $data = $this->request("$this->api_url/api/verify/v2/dossier", $postData);
         return $data;
     }

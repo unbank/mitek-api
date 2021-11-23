@@ -24,11 +24,19 @@ trait CurlTrait {
      * Send POST API request
      *
      * @uses Mitek::auth        Get the authentication token from the response.
-     * @param [type] $url       API Endpoint
-     * @param [type] $postData  HTTP Post Data
+     * @param string $url       API Endpoint
+     * @param mixed $postData  HTTP Post Data
      * @return array            Returns Mitek JSON repsonse as an array.
      */
-    protected function postRequest($url, $postData) {
+    protected function postRequest(string $url, $postData) {
+
+        if ( str_contains($url, "/identity/facecomparison/v3/manual") ) {
+
+            dd($url, array(
+                'Content-Type: application/json',
+                'Authorization: Bearer '.$this->token
+            ), $postData);
+        }
         $curl = curl_init();
         curl_setopt_array($curl, array(
           CURLOPT_URL => $url,

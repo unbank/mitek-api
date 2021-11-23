@@ -162,6 +162,95 @@ class AgentAPI extends MitekAPI
 
 
     /**
+     * Face Comparison - Auto Request
+     *
+     * Each expert processing request is for the evaluation of a single document that can consist of
+     * one to many images depending on the type of document being processed.
+     *
+     * @link https://developer.us.mitekcloud.com/#face-comparison-manual-request
+     *
+     * @param array $images                     A base64-encoded image containing a single page of the
+     *                                          selfie to be used for face comparison and face liveness
+     * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
+     * @param string $customer_reference_id     [OPTIONAL] Customer provided identifier that will be
+     *                                          returned in an identically named field within the body of any subsequent responses
+     * @param string $deviceExtractedData       Type of evidence to be processed.
+     * @return array                            Returns Mitek API Verify Auto - Response as an array.
+     */
+    public function face_comparison_auto_request(string $transactionRequestId, array $images, string $selfie, string $customer_reference_id='') {
+        $postData = [
+            "transactionRequestId" => $transactionRequestId,
+            "referenceImages" => $images,
+            "selfieImages" => [
+                [
+                    "data" => $selfie
+                ]
+            ]
+        ];
+
+        if ( !empty($customer_reference_id) ) {
+            $postData["customerReferenceId"] = $customer_reference_id;
+        }
+
+        $postDataStr = json_encode($postData);
+        $data = $this->request("$this->api_url/identity/facecomparison/v3/auto", $postDataStr);
+        return $data;
+    }
+
+    /**
+     * Face Comparison - Manual Request
+     *
+     * Each expert processing request is for the evaluation of a single document that can consist of
+     * one to many images depending on the type of document being processed.
+     *
+     * @link https://developer.us.mitekcloud.com/#face-comparison-manual-request
+     *
+     * @param array $images                     A base64-encoded image containing a single page of the
+     *                                          selfie to be used for face comparison and face liveness
+     * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
+     * @param string $customer_reference_id     [OPTIONAL] Customer provided identifier that will be
+     *                                          returned in an identically named field within the body of any subsequent responses
+     * @param string $deviceExtractedData       Type of evidence to be processed.
+     * @return array                            Returns Mitek API Verify Auto - Response as an array.
+     */
+    public function face_comparison_manual_request(string $transactionRequestId, array $images, string $selfie, string $customer_reference_id='') {
+        $postData = [
+            "transactionRequestId" => $transactionRequestId,
+            "referenceImages" => $images,
+            "selfieImages" => [
+                [
+                    "data" => $selfie
+                ]
+            ]
+        ];
+
+        if ( !empty($customer_reference_id) ) {
+            $postData["customerReferenceId"] = $customer_reference_id;
+        }
+
+        $postDataStr = json_encode($postData);
+        $data = $this->request("$this->api_url/identity/facecomparison/v3/manual", $postDataStr);
+        return $data;
+    }
+
+    /**
+     * Face Comparison - Manual Retrieval Request
+     *
+     * Results retrieval is the final step in retrieving the final results from a manual request.
+     *
+     * @link https://developer.us.mitekcloud.com/#face-comparison-manual-response
+     *
+     * @param string $transactionRequestId       A valid UUID for a previously submitted Mobile Verify Auto request
+     * @return array                            Returns Mitek API Verify Auto - Response as an array.
+     */
+    public function face_comparison_retrieval(string $transactionRequestId)
+    {
+        $data = $this->getRequest("$this->api_url/identity/facecomparison/v3/manual/$transactionRequestId");
+        return $data;
+    }
+
+
+    /**
      * Expert Retrieval Request
      *
      * Results retrieval is the final step in expert review processing.
