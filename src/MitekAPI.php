@@ -23,8 +23,8 @@ class MitekAPI
     protected $scope;
     protected $token = null;
 
-    protected $api_url = 'https://api.sandbox.west-1.us.mitekcloud.com';
-    protected $production_api_url = 'https://api.sandbox.west-1.us.mitekcloud.com';
+    protected $api_url = 'https://api.west-1.us.mitekcloud.com';
+    protected $production_api_url = 'https://api.west-1.us.mitekcloud.com';
     protected $sandbox_api_url = 'https://api.sandbox.west-1.us.mitekcloud.com';
 
 
