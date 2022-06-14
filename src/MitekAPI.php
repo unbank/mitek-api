@@ -130,6 +130,7 @@ class MitekAPI
         }
 
         $has_selfie = '';
+        $biometric = '';
         if ( !empty($selfie) ) {
             $biometric = '{
                 "type": "Biometric",
@@ -140,13 +141,11 @@ class MitekAPI
             $has_selfie = ',
             "configuration": {
                 "verifications": {
-                  "faceComparison": true
+                  "faceComparison": true,
+                  "dataSignalAAMVA": true
                 }
               }';
-        } else {
-            $biometric = '';
         }
-
         $images_json = json_encode($images);
 
         $postData = '{
