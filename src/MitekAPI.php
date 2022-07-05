@@ -24,8 +24,8 @@ class MitekAPI
     protected $token = null;
 
     protected $api_url = 'https://api.west-1.us.mitekcloud.com';
-    protected $production_api_url = 'https://api.west-1.us.mitekcloud.com';
-    protected $sandbox_api_url = 'https://api.sandbox.west-1.us.mitekcloud.com';
+    // protected $production_api_url = 'https://api.west-1.us.mitekcloud.com';
+    // protected $sandbox_api_url = 'https://api.sandbox.west-1.us.mitekcloud.com';
 
 
     /**
@@ -34,10 +34,10 @@ class MitekAPI
      * @param string $token         Mitek Auth Token. If no, token is provided, execute the MitekAPI::auth function to generate a new token.
      * @param boolean $sandbox      Use Mitek Sandbox API URL instead of the Production API URL if set to `true`. Default: `false`
      */
-    public function __construct($token = null, $sandbox=false)
+    public function __construct($token = null, $url='https://api.west-1.us.mitekcloud.com')
     {
         $this->token = $token;
-        $this->api_url = ( $sandbox )? $this->sandbox_api_url : $this->production_api_url;
+        $this->api_url = $url;
     }
 
     /**
