@@ -142,6 +142,7 @@ class MitekAPI
             "configuration": {
                 "verifications": {
                   "faceComparison": true,
+                  "faceLiveness": true,
                   "dataSignalAAMVA": true
                 }
               }';
